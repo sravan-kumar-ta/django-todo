@@ -27,5 +27,10 @@ def complete(request, id):
     return redirect('/')
 
 
-def test(request):
-    return redirect(request, 'sample.html')
+def add_todo(request):
+    title = request.GET['title']
+    priority = request.GET['priority']
+    date = request.GET['date']
+    task = Task.objects.create(title=title, priority=priority, created_at=date)
+    task.save()
+    return redirect('/')

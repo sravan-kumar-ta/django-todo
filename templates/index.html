@@ -27,28 +27,33 @@
             <!-- Create todo section -->
             <div id="modal" class="modal fade" data-backdrop="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-title text-md">Add ToDo here...</div> <button class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="p-2 text-center">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Enter ToDo here..." class="form-control" id="pwd">
-                                </div>
-                                <div class="form-group" class="border border-success">
-                                    <select style="border: none; outline: none; margin-right: 50px;padding-right: 10px;">
-                                        <option>Select priority</option>
-                                        <option>High</option>
-                                        <option>Medium</option>
-                                        <option>Low</option>
-                                    </select>
-                                    <input type="date" name="" id="myDate" value="23-03-2023" style="border: none; outline: none;">
+                    <form action="{% url 'add_todo' %}">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title text-md">Add ToDo here...</div> <button class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="p-2 text-center">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter ToDo here..." class="form-control" id="pwd" name="title">
+                                    </div>
+                                    <div class="form-group" class="border border-success">
+                                        <select name="priority" style="border: none; outline: none; margin-right: 50px;padding-right: 10px;">
+                                            <option>Select priority</option>
+                                            <option value="high">High</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="low">Low</option>
+                                        </select>
+                                        <input type="date" name="date" id="myDate" value="" style="border: none; outline: none;">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save ToDo</button>
+                            </div>
                         </div>
-                        <div class="modal-footer"> <button type="button" class="btn btn-light" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary" data-dismiss="modal">Save Changes</button> </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="p-2 mx-4 border-black-25 border-bottom"></div>
@@ -245,7 +250,7 @@
                                     <div class="row">
                                         <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
                                     </div>
-                                    <p class="font-weight-bold mb-2"> Are you sure you wanna delete "<span id="id_title""></span>"?</p>
+                                    <p class="font-weight-bold mb-2"> Are you sure you wanna delete "<span id="id_title"></span>"?</p>
                                     <input type="hidden" name="obj_id" id="valued" value="">
                                     <p class="text-muted "> This change will affected your to-do list.</p>
                                 </div>
