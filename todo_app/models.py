@@ -7,7 +7,7 @@ class Task(models.Model):
     title = models.CharField(max_length=100)
     priority = models.CharField(max_length=20)
     created_at = models.DateField(default=datetime.date.today)
-    is_active = models.BooleanField()
+    is_complete = models.BooleanField()
 
     def __str__(self):
         return self.title

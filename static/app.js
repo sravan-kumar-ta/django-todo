@@ -41,6 +41,7 @@ now = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-'
 document.getElementById("myDate").defaultValue = now;
 
 function valuepass(x){
-    var values = x;
-    document.getElementById('valued').value = values;
+    var title = document.getElementById('title'+x).value;
+    document.getElementById('valued').value = x;
+    document.getElementById('id_title').innerHTML = title;
 }

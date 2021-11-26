@@ -80,10 +80,6 @@ button:focus {
     border-color: #fff !important
 }
 
-span {
-    font-size: 30px !important
-}
-
 .done {
     cursor: pointer;
 }
