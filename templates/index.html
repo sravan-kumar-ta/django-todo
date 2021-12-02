@@ -40,9 +40,9 @@
                                     <div class="form-group" class="border border-success">
                                         <select name="priority" style="border: none; outline: none; margin-right: 50px;padding-right: 10px;">
                                             <option>Select priority</option>
-                                            <option value="high">High</option>
-                                            <option value="medium">Medium</option>
-                                            <option value="low">Low</option>
+                                            {% for i in priority %}
+                                                <option value="high">{{i}}</option>
+                                            {% endfor %}
                                         </select>
                                         <input type="date" name="date" id="myDate" value="" style="border: none; outline: none;">
                                     </div>
@@ -100,7 +100,7 @@
                         <div class="col-auto m-1 p-0 todo-actions">
                             <div class="row d-flex align-items-center justify-content-end">
                                 <h5 class="m-0 p-0 px-2">
-                                    <i class="fa fa-pencil text-info btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
+                                     <i class="fa fa-pencil text-info btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
                                 </h5>
                                 <h5 class="m-0 p-0 px-2">
                                     <a href="" data-toggle="modal" data-target="#my-modal" onclick="valuepass(3)">
@@ -137,12 +137,13 @@
                                 {% if obj.is_complete %}
                                     <div class="badge badge-success" style="margin-right: 10px;">Completed</div>
                                 {% else %}
+                                    {{ value|stringformat:"obj.priority" }}
                                     {% if obj.priority == 'high' %}
                                         <div class="badge badge-danger" style="margin-right: 10px;">High</div>
-                                    {% elif obj.priority == 'medium' %}
-                                        <div class="badge badge-warning" style="margin-right: 10px;">Medium</div>
-                                    {% else %}
-                                        <div class="badge badge-info" style="margin-right: 10px;">Low</div>
+                                    {% elif value == 'medium' %}
+                                        <div class="badge badge-warning" style="margin-right: 10px;">medium</div>
+                                    {% elif obj.priority == 'low' %}
+                                        <div class="badge badge-info" style="margin-right: 10px;">low</div>
                                     {% endif %}
                                 {% endif %}
                             </div>
@@ -151,7 +152,9 @@
                             <div class="col-auto m-1 p-0 todo-actions">
                                 <div class="row d-flex align-items-center justify-content-end">
                                     <h5 class="m-0 p-0 px-2">
-                                        <i class="fa fa-pencil text-info btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
+                                        <a href="{% url 'update' obj.id %}">
+                                            <i class="fa fa-pencil text-info btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
+                                        </a>
                                     </h5>
                                     <h5 class="m-0 p-0 px-2">
                                         <a href="" data-toggle="modal" data-target="#my-modal" onclick="valuepass({{obj.id}})">
