@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task, Priorities
-
-
-# from forms import UpdateForm
+from .forms import UpdateForm
 
 
 def home(request):
     obj = Task.objects.all()
-    priority = Priorities.objects.all()
-    return render(request, 'index.html', {'objects': obj, 'priority': priority})
+    return render(request, 'index.html', {'objects': obj})
 
 
 def delete(request):
@@ -44,10 +41,11 @@ def add_todo(request):
     return redirect('/')
 
 
-#
-# def update(request, id):
-#     form = UpdateForm
-#     return render(request, 'updated.html', {'form': form})
-
 def update(request, id):
-    return render(request, 'update.html')
+    # instance = Task.objects.get(id=id)
+    instance = get_object_or_404(Task, id=id)
+    form = UpdateForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
+    return render(request, 'update.html', {'form': form})

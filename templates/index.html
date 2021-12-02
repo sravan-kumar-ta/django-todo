@@ -137,12 +137,11 @@
                                 {% if obj.is_complete %}
                                     <div class="badge badge-success" style="margin-right: 10px;">Completed</div>
                                 {% else %}
-                                    {{ value|stringformat:"obj.priority" }}
-                                    {% if obj.priority == 'high' %}
+                                    {% if obj.priority.title == 'high' %}
                                         <div class="badge badge-danger" style="margin-right: 10px;">High</div>
-                                    {% elif value == 'medium' %}
+                                    {% elif obj.priority.title == 'medium' %}
                                         <div class="badge badge-warning" style="margin-right: 10px;">medium</div>
-                                    {% elif obj.priority == 'low' %}
+                                    {% elif obj.priority.title == 'low' %}
                                         <div class="badge badge-info" style="margin-right: 10px;">low</div>
                                     {% endif %}
                                 {% endif %}
