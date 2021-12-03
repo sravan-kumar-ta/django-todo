@@ -4,8 +4,9 @@ from .forms import UpdateForm
 
 
 def home(request):
-    obj = Task.objects.all()
-    return render(request, 'index.html', {'objects': obj})
+    obj = Task.objects.all().order_by('?')
+    priority = Priorities.objects.all()
+    return render(request, 'index.html', {'objects': obj, 'priority': priority})
 
 
 def delete(request):
@@ -49,3 +50,18 @@ def update(request, id):
         form.save()
         return redirect('/')
     return render(request, 'update.html', {'form': form})
+
+
+def filter(request, kwrd):
+    obj = Task.objects.filter(is_complete=kwrd)
+    priority = Priorities.objects.all()
+    return render(request, 'index.html', {'objects': obj, 'priority': priority})
+
+
+def sort(request, value):
+    if value == 1:
+        obj = Task.objects.order_by('created_at')
+    else:
+        obj = Task.objects.order_by('-created_at')
+    priority = Priorities.objects.all()
+    return render(request, 'index.html', {'objects': obj, 'priority': priority, 'value': value})
