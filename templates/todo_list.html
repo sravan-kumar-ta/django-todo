@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Todo List</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.task }}
+        <button type="submit">Add</button>
+    </form>
+
+    <ul class="task-list">
+        {% for todo in todos %}
+        <li>
+            {% if todo.is_complete %}<s>{% endif %}
+            {{ todo.task }}
+            {% if todo.is_complete %}</s>{% endif %}
+            {% if not todo.is_complete %}
+            <a href="{% url 'complete' todo.id %}" class="task-btn update-btn">Complete</a>
+            {% else %}
+            <a href="{% url 'todo_delete' todo.id %}" class="task-btn delete-btn">delete</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
